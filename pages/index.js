@@ -1,9 +1,7 @@
 import styles from "../styles/Home.module.css";
 
-export default function Home({ characters }) {
+export default function Home() {
   // console.log("charachters", characters.characters.results);
-  const pageCount = characters.characters.info.pages;
-  console.log("pageCount:", pageCount);
 
   return (
     <div className={styles.container}>

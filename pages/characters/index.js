@@ -1,28 +1,14 @@
 import client from "../../config/appolloClient";
 import { getAllCharacters } from "../../config/queries";
 import styles from "../../styles/Home.module.css";
+import CharactersComponent from "../../components/CharactersComponent";
 
 const Characters = ({ characters }) => {
+  //   const pageCount = characters?.info?.pages;
+  //   console.log("pageCount:", pageCount);
   return (
-    <div className={styles.container}>
-      <main className={styles.main}>
-        <h1 className={styles.title}>“Rick and Morty” adventure</h1>
-
-        <div className={styles.grid}>
-          {characters &&
-            characters.characters?.results?.map((char) => (
-              <div className={styles.card} key={char.id}>
-                {" "}
-                {char.name}
-              </div>
-            ))}
-
-          <div>
-            {" "}
-            <button> Previous</button> <button> Next</button>
-          </div>
-        </div>
-      </main>
+    <div>
+      <CharactersComponent characters={characters} />{" "}
     </div>
   );
 };
@@ -36,7 +22,7 @@ export const getStaticProps = async () => {
   //  console.log("data", data);
   return {
     props: {
-      characters: data,
+      characters: data?.characters,
     },
   };
 };

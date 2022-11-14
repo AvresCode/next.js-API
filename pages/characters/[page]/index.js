@@ -13,7 +13,7 @@ const pages = ({ characters }) => {
 export const getStaticProps = async ({ params: { page } }) => {
   const { data } = await client.query({
     query: getAllCharacters,
-    variables: { page: Number(page) },
+    variables: { page: parseInt(page) },
   });
 
   //  console.log("data", data);

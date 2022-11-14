@@ -1,6 +1,14 @@
 import styles from "../styles/Home.module.css";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 const CharactersComponent = ({ characters }) => {
+  const pageCount = characters?.info?.pages;
+  console.log("pageCount:", pageCount);
+  const router = useRouter();
+  const page = router.query.page ? parseInt(router.query.page) : 1;
+  console.log("page", page);
+
   return (
     <div className={styles.container}>
       <main className={styles.main}>
@@ -16,8 +24,16 @@ const CharactersComponent = ({ characters }) => {
             ))}
 
           <div>
-            {" "}
-            <button> Previous</button> <button> Next</button>
+            {page > 1 && (
+              <Link href={`${page - 1}`} passHref>
+                <button> Previous</button>
+              </Link>
+            )}
+            {page < pageCount && (
+              <Link href={`${page + 1}`} passHref>
+                <button> Next</button>{" "}
+              </Link>
+            )}
           </div>
         </div>
       </main>

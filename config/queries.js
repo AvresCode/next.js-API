@@ -18,3 +18,21 @@ const getAllCharacters = gql`
 `;
 
 export { getAllCharacters };
+
+// const getAllCharacters = gql`
+//   query getCharacters($slug: String) {
+//     characters(slug: $slug) {
+//       slug
+//       info {
+//         pages
+//         next
+//         prev
+//       }
+//       results {
+//         id
+//         name
+//         species
+//       }
+//     }
+//   }
+// `;

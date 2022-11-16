@@ -16,7 +16,7 @@ const Characters = ({ characters }) => {
 export const getStaticProps = async () => {
   const { data } = await client.query({
     query: getAllCharacters,
-    variables: { page: 1 },
+    //variables: { page: 1 },
   });
 
   //  console.log("data", data);

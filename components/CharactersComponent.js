@@ -6,7 +6,9 @@ const CharactersComponent = ({ characters }) => {
   const pageCount = characters?.info?.pages;
   console.log("pageCount:", pageCount);
   const router = useRouter();
+  // console.log("router", router.query);
   const page = router.query.page ? parseInt(router.query.page) : 1;
+  // const page = parseInt(router.query.page) || 1;
   console.log("page", page);
 
   return (
@@ -28,8 +30,13 @@ const CharactersComponent = ({ characters }) => {
               <Link href={`${page - 1}`} passHref>
                 <button> Previous</button>
               </Link>
+            )}{" "}
+            {page === 1 && (
+              <Link href={`characters/2`} passHref>
+                <button> Next</button>{" "}
+              </Link>
             )}
-            {page < pageCount && (
+            {page < pageCount && page !== 1 && (
               <Link href={`${page + 1}`} passHref>
                 <button> Next</button>{" "}
               </Link>

@@ -5,6 +5,8 @@ import Link from "next/link";
 const CharactersComponent = ({ characters }) => {
   const pageCount = characters?.info?.pages;
   console.log("pageCount:", pageCount);
+  const nextPage = characters?.info?.next;
+  console.log("next", nextPage);
   const router = useRouter();
   // console.log("router", router.query);
   const page = router.query.page ? parseInt(router.query.page) : 1;

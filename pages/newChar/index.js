@@ -4,7 +4,7 @@ import styles from "../../styles/Home.module.css";
 //import { PageNavigate } from "../../components/PageNavigate";
 import { useState } from "react";
 
-const Characters = () => {
+const Characters = ({ characters }) => {
   //   const pageCount = characters?.info?.pages;
   //   console.log("pageCount:", pageCount);
   const [newPageData, setNewPageData] = useState(null);
@@ -23,6 +23,29 @@ const Characters = () => {
     setNextPage(data.characters.info.next);
     // console.log("prev next:", prevPage, nextPage);
   };
+
+  if (!newPageData) {
+    return (
+      <div className={styles.container}>
+        <main className={styles.main}>
+          <h1 className={styles.title}>“Rick and Morty” adventure</h1>
+
+          <div className={styles.grid}></div>
+          <div>
+            {" "}
+            {characters &&
+              characters.results.map((char) => (
+                <div className={styles.card} key={char.id}>
+                  {" "}
+                  {char.name}
+                </div>
+              ))}
+            <button onClick={() => newPage(2)}>next</button>{" "}
+          </div>
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.container}>
@@ -44,44 +67,24 @@ const Characters = () => {
             {prevPage ? prevPage + 1 : 1}
             <button onClick={() => newPage(nextPage)}>next</button>{" "}
           </div>
-
-          {/* <div>{currentPage === 1 && newPage(currentPage)}</div> */}
-
-          {/* <div>
-          {page > 1 && (
-            <Link href={`${page - 1}`} passHref>
-              <button> Previous</button>
-            </Link>
-          )}{" "}
-          {page === 1 && (
-            <Link href={`characters/2`} passHref>
-              <button> Next</button>{" "}
-            </Link>
-          )}
-          {page < pageCount && page !== 1 && (
-            <Link href={`${page + 1}`} passHref>
-              <button> Next</button>{" "}
-            </Link>
-          )}
-        </div> */}
         </div>
       </main>
     </div>
   );
 };
 
-// export const getStaticProps = async ({ pageNum }) => {
-//   const { data } = await client.query({
-//     query: getAllCharacters,
-//     variables: { page: pageNum },
-//   });
+export const getStaticProps = async ({ pageNum }) => {
+  const { data } = await client.query({
+    query: getAllCharacters,
+    variables: { page: pageNum },
+  });
 
-//   // console.log("variables", pageNum);
-//   return {
-//     props: {
-//       characters: data?.characters,
-//     },
-//   };
-// };
+  // console.log("variables", pageNum);
+  return {
+    props: {
+      characters: data?.characters,
+    },
+  };
+};
 
 export default Characters;
